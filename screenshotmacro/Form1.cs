@@ -16,15 +16,16 @@ namespace screenshotmacro
     public partial class Form1 : Form
     {
 
-
         public Form1()
         {
             InitializeComponent();
-            Boolean success = Form1.RegisterHotKey(this.Handle, this.GetType().GetHashCode(), 0x0002, 0x45);
         }
 
         [DllImport("user32.dll")]
         public static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vlc);
+
+        [DllImport("user32.dll")]
+        private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
 
         #region Mouse Click
         [DllImport("user32.dll")]
@@ -47,18 +48,61 @@ namespace screenshotmacro
 
         Bitmap ss;
         Tuple<int, int> pos;
-       
-
+        string loggerpath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)
+            + @"\AppData\Local\Apps\2.0\X9D5GX7E.HL7\L0D4VM4B.7RA\syne..tion_d724cb0a5b43bed
+            c_0001.0000_f819044b4e996793\Synergy.BaseballLogger.WinApp.exe";
 
         private void Form1_Load(object sender, EventArgs e)
         {
             ss = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, PixelFormat.Format32bppArgb);
+            MessageBox.Show("Hotkeys won't work unless the Logger is open.", "Warning!");
+        }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            Form1.RegisterHotKey(this.Handle, 0, 0x0002, 0x7B); // Ctrl + F12
+
+            if (loggerIsRunning())
+            {
+                if (rbSpace.Checked)
+                {
+                    Form1.RegisterHotKey(this.Handle, 1, 0x0000, 0x20); // Space
+                    this.Visible = false;
+                    MessageBox.Show("To stop the hotkey, press Ctrl + F12");
+                }
+                else if (rbCtrlE.Checked)
+                {
+                    Form1.RegisterHotKey(this.Handle, 1, 0x0002, 0x45); // Ctrl + E
+                    this.Visible = false;
+                    MessageBox.Show("To stop the hotkey, press Ctrl + F12");
+                }
+                else if (rbCtrlS.Checked)
+                {
+                    Form1.RegisterHotKey(this.Handle, 1, 0x0002, 0x53); // Ctrl + S
+                    this.Visible = false;
+                    MessageBox.Show("To stop the hotkey, press Ctrl + F12");
+                }
+                else if (rbCtrlF.Checked)
+                {
+                    Form1.RegisterHotKey(this.Handle, 1, 0x0002, 0x46); // Ctrl + F
+                    this.Visible = false;
+                    MessageBox.Show("To stop the hotkey, press Ctrl + F12");
+                }
+                else
+                    MessageBox.Show("Please select hotkey to use", "Error");
+            }
+            else
+            {
+                MessageBox.Show("Logger isn't running, open it first.");
+            }
+
         }
 
         private bool loggerIsRunning()
         {
-            Process[] pname = Process.GetProcessesByName("Synergy.BaseballLogger.WinApp");
-            if (pname.Length == 0)
+            Process[] logger = Process.GetProcessesByName("Synergy.BaseballLogger.WinApp");
+
+            if (logger.Length == 0)
                 return false;
             else
                 return true;
@@ -83,49 +127,52 @@ namespace screenshotmacro
             return null;
         }
 
-        public void showHotkeySelect()
-        {
-            HotkeySelect hotkeyselect = new HotkeySelect();
-            hotkeyselect.Show();
-
-            // hotkeyselect.Dispose();
-        }
-
         protected override void WndProc(ref Message m)
         {
             if (m.Msg == 0x0312)
             {
-                showHotkeySelect();
-                Graphics g = Graphics.FromImage(ss);
-                Size s = new Size(ss.Width, ss.Height);
-                g.CopyFromScreen(0, 0, 0, 0, s);
-                //ss.Save(@"C:\Users\Leon\Desktop\ss.png");
-
-                if (loggerIsRunning())
+                IntPtr i = m.WParam;
+                if ((int)i == 1)
                 {
-                    GetPixels();
-                    this.Cursor = new Cursor(Cursor.Current.Handle);
-                    Point firstPos = Cursor.Position;
-                    Cursor.Position = new Point(pos.Item1 + 22, pos.Item2 + 13);
-                    LeftClick();
-                    Cursor.Position = firstPos;
+                    Graphics g = Graphics.FromImage(ss);
+                    Size s = new Size(ss.Width, ss.Height);
+                    g.CopyFromScreen(0, 0, 0, 0, s);
+                    //ss.Save(@"C:\Users\Leon\Desktop\ss.png");
+
+                    if (loggerIsRunning())
+                    {
+                        GetPixels();
+                        this.Cursor = new Cursor(Cursor.Current.Handle);
+                        Point firstPos = Cursor.Position;
+                        Cursor.Position = new Point(pos.Item1 + 22, pos.Item2 + 13);
+                        LeftClick();
+                        Cursor.Position = firstPos;
+
+                    }
+                    else
+                    {
+                        DialogResult dialogResult = MessageBox.Show("Do you want to open the Logger?", "Logger not running", MessageBoxButtons.YesNo);
+                        if (dialogResult == DialogResult.Yes)
+                        {
+                            Process.Start(loggerpath);
+                        }
+                        else if (dialogResult == DialogResult.No)
+                        {
+                            MessageBox.Show("k den bb");
+                            Application.Exit();
+                        }
+                    }
                 }
                 else
                 {
-                    DialogResult dialogResult = MessageBox.Show("Do you want to open the Logger?", "Logger not running", MessageBoxButtons.YesNo);
-                    if (dialogResult == DialogResult.Yes)
-                    {
-
-                        //  Process.Start(@"C:\Users\Leon\AppData\Local\Apps\2.0\X9D5GX7E.HL7\L0D4VM4B.7RA\syne..tion_d724cb0a5b43bedc_0001.0000_f819044b4e996793\Synergy.BaseballLogger.WinApp.exe");
-                    }
-                    else if (dialogResult == DialogResult.No)
-                    {
-                      //  MessageBox.Show("k den bb");
-                      //  Application.Exit();
-                    }
+                    this.Visible = true;
+                    Form1.UnregisterHotKey(this.Handle, 1);
+                    MessageBox.Show("unregistered hotkey");
                 }
             }
             base.WndProc(ref m);
         }
+
+
     }
 }

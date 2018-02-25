@@ -8,4 +8,3 @@ C:\Users\Leon\Desktop\Projects\screenshotmacro\screenshotmacro\obj\Debug\screens
 C:\Users\Leon\Desktop\Projects\screenshotmacro\screenshotmacro\obj\Debug\screenshotmacro.csproj.CoreCompileInputs.cache
 C:\Users\Leon\Desktop\Projects\screenshotmacro\screenshotmacro\obj\Debug\screenshotmacro.exe
 C:\Users\Leon\Desktop\Projects\screenshotmacro\screenshotmacro\obj\Debug\screenshotmacro.pdb
-C:\Users\Leon\Desktop\Projects\screenshotmacro\screenshotmacro\obj\Debug\screenshotmacro.HotkeySelect.resources
