@@ -1,0 +1,10 @@
+C:\Users\Leon\Desktop\Projects\screenshotmacro\screenshotmacro\bin\Debug\screenshotmacro.exe.config
+C:\Users\Leon\Desktop\Projects\screenshotmacro\screenshotmacro\bin\Debug\screenshotmacro.exe
+C:\Users\Leon\Desktop\Projects\screenshotmacro\screenshotmacro\bin\Debug\screenshotmacro.pdb
+C:\Users\Leon\Desktop\Projects\screenshotmacro\screenshotmacro\obj\Debug\screenshotmacro.csprojResolveAssemblyReference.cache
+C:\Users\Leon\Desktop\Projects\screenshotmacro\screenshotmacro\obj\Debug\screenshotmacro.Form1.resources
+C:\Users\Leon\Desktop\Projects\screenshotmacro\screenshotmacro\obj\Debug\screenshotmacro.Properties.Resources.resources
+C:\Users\Leon\Desktop\Projects\screenshotmacro\screenshotmacro\obj\Debug\screenshotmacro.csproj.GenerateResource.Cache
+C:\Users\Leon\Desktop\Projects\screenshotmacro\screenshotmacro\obj\Debug\screenshotmacro.csproj.CoreCompileInputs.cache
+C:\Users\Leon\Desktop\Projects\screenshotmacro\screenshotmacro\obj\Debug\screenshotmacro.exe
+C:\Users\Leon\Desktop\Projects\screenshotmacro\screenshotmacro\obj\Debug\screenshotmacro.pdb
