@@ -113,9 +113,9 @@ namespace screenshotmacro
             // green from the apply button
             Color c = Color.FromArgb(30, 165, 46);
 
-            for (int y = Screen.PrimaryScreen.Bounds.Height / 3; y < ss.Height; y++)
+            for (int y = 0; y < ss.Height; y++)
             {
-                for (int x = Screen.PrimaryScreen.Bounds.Width / 3; x < ss.Width; x++)
+                for (int x = 0; x < ss.Width; x++)
                 {
                     if (ss.GetPixel(x, y) == c)
                     {
