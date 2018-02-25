@@ -9,6 +9,7 @@ using System.Drawing.Imaging;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using Microsoft.VisualBasic;
 
 namespace screenshotmacro
 {
@@ -19,14 +20,18 @@ namespace screenshotmacro
         public Form1()
         {
             InitializeComponent();
+            Boolean success = Form1.RegisterHotKey(this.Handle, this.GetType().GetHashCode(), 0x0002, 0x45);
         }
+
+        [DllImport("user32.dll")]
+        public static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vlc);
 
         #region Mouse Click
         [DllImport("user32.dll")]
         static extern void mouse_event(int dwFlags, int dx, int dy, int dwData, int dwExtraInfo);
         private const int MOUSEEVENTF_MOVE = 0x0001;
         private const int MOUSEEVENTF_LEFTDOWN = 0x0002;
-        private const int MOUSEEVENTF_LEFTUP = 0x0004;    
+        private const int MOUSEEVENTF_LEFTUP = 0x0004;
 
         public static void move(int xDelta, int yDelta)
         {
@@ -42,42 +47,12 @@ namespace screenshotmacro
 
         Bitmap ss;
         Tuple<int, int> pos;
+       
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            ss = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, PixelFormat.Format32bppArgb);        
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-            Graphics g = Graphics.FromImage(ss);
-            Size s = new Size(ss.Width, ss.Height);
-            g.CopyFromScreen(0, 0, 0, 0, s);
-            //ss.Save(@"C:\Users\Leon\Desktop\ss.png");
-
-            if (loggerIsRunning())
-            {
-                GetPixels();
-                this.Cursor = new Cursor(Cursor.Current.Handle);
-                Point firstPos = Cursor.Position;
-                Cursor.Position = new Point(pos.Item1 + 22, pos.Item2 + 13);
-                LeftClick();
-                Cursor.Position = firstPos;
-            }
-            else
-            {
-                DialogResult dialogResult = MessageBox.Show("Do you want to open the Logger?", "Logger not running", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    Process.Start(@"C:\Users\Leon\AppData\Local\Apps\2.0\X9D5GX7E.HL7\L0D4VM4B.7RA\syne..tion_d724cb0a5b43bedc_0001.0000_f819044b4e996793\Synergy.BaseballLogger.WinApp.exe");
-                }
-                else if (dialogResult == DialogResult.No)
-                {
-                    MessageBox.Show("k den bb");
-                    Application.Exit();
-                }
-            }
+            ss = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, PixelFormat.Format32bppArgb);
         }
 
         private bool loggerIsRunning()
@@ -94,9 +69,9 @@ namespace screenshotmacro
             // green from the apply button
             Color c = Color.FromArgb(30, 165, 46);
 
-            for (int y = Screen.PrimaryScreen.Bounds.Height / 2; y < ss.Height; y++)
+            for (int y = Screen.PrimaryScreen.Bounds.Height / 3; y < ss.Height; y++)
             {
-                for (int x = Screen.PrimaryScreen.Bounds.Width / 2; x < ss.Width; x++)
+                for (int x = Screen.PrimaryScreen.Bounds.Width / 3; x < ss.Width; x++)
                 {
                     if (ss.GetPixel(x, y) == c)
                     {
@@ -108,9 +83,49 @@ namespace screenshotmacro
             return null;
         }
 
-        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        public void showHotkeySelect()
         {
-         
+            HotkeySelect hotkeyselect = new HotkeySelect();
+            hotkeyselect.Show();
+
+            // hotkeyselect.Dispose();
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == 0x0312)
+            {
+                showHotkeySelect();
+                Graphics g = Graphics.FromImage(ss);
+                Size s = new Size(ss.Width, ss.Height);
+                g.CopyFromScreen(0, 0, 0, 0, s);
+                //ss.Save(@"C:\Users\Leon\Desktop\ss.png");
+
+                if (loggerIsRunning())
+                {
+                    GetPixels();
+                    this.Cursor = new Cursor(Cursor.Current.Handle);
+                    Point firstPos = Cursor.Position;
+                    Cursor.Position = new Point(pos.Item1 + 22, pos.Item2 + 13);
+                    LeftClick();
+                    Cursor.Position = firstPos;
+                }
+                else
+                {
+                    DialogResult dialogResult = MessageBox.Show("Do you want to open the Logger?", "Logger not running", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+
+                        //  Process.Start(@"C:\Users\Leon\AppData\Local\Apps\2.0\X9D5GX7E.HL7\L0D4VM4B.7RA\syne..tion_d724cb0a5b43bedc_0001.0000_f819044b4e996793\Synergy.BaseballLogger.WinApp.exe");
+                    }
+                    else if (dialogResult == DialogResult.No)
+                    {
+                      //  MessageBox.Show("k den bb");
+                      //  Application.Exit();
+                    }
+                }
+            }
+            base.WndProc(ref m);
         }
     }
 }
