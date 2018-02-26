@@ -19,13 +19,24 @@ namespace screenshotmacro
         public Form1()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
         }
 
+        #region Dll imports
         [DllImport("user32.dll")]
         public static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vlc);
 
         [DllImport("user32.dll")]
         private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
+        private static extern IntPtr GetForegroundWindow();
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        private static extern int GetWindowThreadProcessId(IntPtr handle, out int processId);
+
+        #endregion
 
         #region Mouse Click
         [DllImport("user32.dll")]
@@ -47,55 +58,60 @@ namespace screenshotmacro
         #endregion
 
         Bitmap ss;
-        Tuple<int, int> pos;
-        string loggerpath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)
-            + @"\AppData\Local\Apps\2.0\X9D5GX7E.HL7\L0D4VM4B.7RA\syne..tion_d724cb0a5b43bed
-            c_0001.0000_f819044b4e996793\Synergy.BaseballLogger.WinApp.exe";
+        Tuple<int, int> pos;  
 
         private void Form1_Load(object sender, EventArgs e)
         {
             ss = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, PixelFormat.Format32bppArgb);
-            MessageBox.Show("Hotkeys won't work unless the Logger is open.", "Warning!");
         }
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            Form1.RegisterHotKey(this.Handle, 0, 0x0002, 0x7B); // Ctrl + F12
+            //if (loggerIsRunning() == false)
+            //{
+            //    DialogResult dialogResult = MessageBox.Show("Do you want to open the Logger?", "Logger not running", MessageBoxButtons.YesNo);
+            //    if (dialogResult == DialogResult.Yes)
+            //    {
+            //     //   Process.Start(loggerpath);
+            //    }
+            //    else if (dialogResult == DialogResult.No)
+            //    {
+            //        MessageBox.Show("k den bb");
+            //        Application.Exit();
+            //    }
+            //}
 
-            if (loggerIsRunning())
+            Form1.RegisterHotKey(this.Handle, 0, 0x0002, 0x7B); // Ctrl + F12     
+            if (rbSpace.Checked)
             {
-                if (rbSpace.Checked)
-                {
-                    Form1.RegisterHotKey(this.Handle, 1, 0x0000, 0x20); // Space
-                    this.Visible = false;
-                    MessageBox.Show("To stop the hotkey, press Ctrl + F12");
-                }
-                else if (rbCtrlE.Checked)
-                {
-                    Form1.RegisterHotKey(this.Handle, 1, 0x0002, 0x45); // Ctrl + E
-                    this.Visible = false;
-                    MessageBox.Show("To stop the hotkey, press Ctrl + F12");
-                }
-                else if (rbCtrlS.Checked)
-                {
-                    Form1.RegisterHotKey(this.Handle, 1, 0x0002, 0x53); // Ctrl + S
-                    this.Visible = false;
-                    MessageBox.Show("To stop the hotkey, press Ctrl + F12");
-                }
-                else if (rbCtrlF.Checked)
-                {
-                    Form1.RegisterHotKey(this.Handle, 1, 0x0002, 0x46); // Ctrl + F
-                    this.Visible = false;
-                    MessageBox.Show("To stop the hotkey, press Ctrl + F12");
-                }
-                else
-                    MessageBox.Show("Please select hotkey to use", "Error");
+                Form1.RegisterHotKey(this.Handle, 1, 0x0000, 0x20); // Space
+                this.Visible = false;
+                MessageBox.Show("To pause/disable the hotkey, press Ctrl + F12." +
+                    "\nHotkeys won't work unless the Logger is open.");
+            }
+            else if (rbCtrlE.Checked)
+            {
+                Form1.RegisterHotKey(this.Handle, 1, 0x0002, 0x45); // Ctrl + E
+                this.Visible = false;
+                MessageBox.Show("To pause/disable the hotkey, press Ctrl + F12." +
+                    "\nHotkeys won't work unless the Logger is open.");
+            }
+            else if (rbCtrlS.Checked)
+            {
+                Form1.RegisterHotKey(this.Handle, 1, 0x0002, 0x53); // Ctrl + S
+                this.Visible = false;
+                MessageBox.Show("To pause/disable the hotkey, press Ctrl + F12." +
+                    "\nHotkeys won't work unless the Logger is open.");
+            }
+            else if (rbCtrlF.Checked)
+            {
+                Form1.RegisterHotKey(this.Handle, 1, 0x0002, 0x46); // Ctrl + F
+                this.Visible = false;
+                MessageBox.Show("To pause/disable the hotkey, press Ctrl + F12." +
+                    "\nHotkeys won't work unless the Logger is open.");
             }
             else
-            {
-                MessageBox.Show("Logger isn't running, open it first.");
-            }
-
+                MessageBox.Show("Please select hotkey to use", "Error");
         }
 
         private bool loggerIsRunning()
@@ -113,9 +129,9 @@ namespace screenshotmacro
             // green from the apply button
             Color c = Color.FromArgb(30, 165, 46);
 
-            for (int y = 0; y < ss.Height; y++)
+            for (int y = Screen.PrimaryScreen.Bounds.Height / 2; y < ss.Height; y++)
             {
-                for (int x = 0; x < ss.Width; x++)
+                for (int x = Screen.PrimaryScreen.Bounds.Width / 3; x < ss.Width; x++)
                 {
                     if (ss.GetPixel(x, y) == c)
                     {
@@ -144,22 +160,11 @@ namespace screenshotmacro
                         GetPixels();
                         this.Cursor = new Cursor(Cursor.Current.Handle);
                         Point firstPos = Cursor.Position;
-                        Cursor.Position = new Point(pos.Item1 + 22, pos.Item2 + 13);
-                        LeftClick();
-                        Cursor.Position = firstPos;
-
-                    }
-                    else
-                    {
-                        DialogResult dialogResult = MessageBox.Show("Do you want to open the Logger?", "Logger not running", MessageBoxButtons.YesNo);
-                        if (dialogResult == DialogResult.Yes)
+                        if (pos != null)
                         {
-                            Process.Start(loggerpath);
-                        }
-                        else if (dialogResult == DialogResult.No)
-                        {
-                            MessageBox.Show("k den bb");
-                            Application.Exit();
+                            Cursor.Position = new Point(pos.Item1 + 22, pos.Item2 + 13);
+                            LeftClick();
+                            Cursor.Position = firstPos;
                         }
                     }
                 }
@@ -167,12 +172,21 @@ namespace screenshotmacro
                 {
                     this.Visible = true;
                     Form1.UnregisterHotKey(this.Handle, 1);
-                    MessageBox.Show("unregistered hotkey");
+                    MessageBox.Show("Disabled hotkeys.");
                 }
             }
             base.WndProc(ref m);
         }
 
+        private void Form1_Shown(object sender, EventArgs e)
+        {
 
+        }
+
+        private void btnHelp_Click(object sender, EventArgs e)
+        {
+            fHelp h = new fHelp();
+            h.Show();
+        }
     }
 }
