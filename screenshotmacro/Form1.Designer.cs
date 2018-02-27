@@ -33,7 +33,7 @@
             this.rbSpace = new System.Windows.Forms.RadioButton();
             this.rbCtrlF = new System.Windows.Forms.RadioButton();
             this.rbCtrlE = new System.Windows.Forms.RadioButton();
-            this.rbCtrlS = new System.Windows.Forms.RadioButton();
+            this.rbBackSlash = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
             this.btnHelp = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -81,16 +81,16 @@
             this.rbCtrlE.Text = "Ctrl + E";
             this.rbCtrlE.UseVisualStyleBackColor = true;
             // 
-            // rbCtrlS
+            // rbBackSlash
             // 
-            this.rbCtrlS.AutoSize = true;
-            this.rbCtrlS.Location = new System.Drawing.Point(118, 75);
-            this.rbCtrlS.Name = "rbCtrlS";
-            this.rbCtrlS.Size = new System.Drawing.Size(59, 17);
-            this.rbCtrlS.TabIndex = 4;
-            this.rbCtrlS.TabStop = true;
-            this.rbCtrlS.Text = "Ctrl + S";
-            this.rbCtrlS.UseVisualStyleBackColor = true;
+            this.rbBackSlash.AutoSize = true;
+            this.rbBackSlash.Location = new System.Drawing.Point(118, 75);
+            this.rbBackSlash.Name = "rbBackSlash";
+            this.rbBackSlash.Size = new System.Drawing.Size(30, 17);
+            this.rbBackSlash.TabIndex = 4;
+            this.rbBackSlash.TabStop = true;
+            this.rbBackSlash.Text = "\\";
+            this.rbBackSlash.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -118,7 +118,7 @@
             this.ClientSize = new System.Drawing.Size(212, 153);
             this.Controls.Add(this.btnHelp);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.rbCtrlS);
+            this.Controls.Add(this.rbBackSlash);
             this.Controls.Add(this.rbCtrlE);
             this.Controls.Add(this.rbCtrlF);
             this.Controls.Add(this.rbSpace);
@@ -126,7 +126,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.Shown += new System.EventHandler(this.Form1_Shown);
+        
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -138,7 +138,7 @@
         private System.Windows.Forms.RadioButton rbSpace;
         private System.Windows.Forms.RadioButton rbCtrlF;
         private System.Windows.Forms.RadioButton rbCtrlE;
-        private System.Windows.Forms.RadioButton rbCtrlS;
+        private System.Windows.Forms.RadioButton rbBackSlash;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnHelp;
     }

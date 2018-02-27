@@ -67,6 +67,7 @@ namespace screenshotmacro
 
         private void btnStart_Click(object sender, EventArgs e)
         {
+            Form1.RegisterHotKey(this.Handle, 0, 0x0002, 0x7B); // Ctrl + F12  
             if (loggerIsRunning())
             {
 
@@ -81,8 +82,6 @@ namespace screenshotmacro
                 //    Application.Exit();
                 //}
 
-
-                Form1.RegisterHotKey(this.Handle, 0, 0x0002, 0x7B); // Ctrl + F12     
                 if (rbSpace.Checked)
                 {
                     Form1.RegisterHotKey(this.Handle, 1, 0x0000, 0x20); // Space
@@ -97,9 +96,9 @@ namespace screenshotmacro
                     MessageBox.Show("To pause/disable the hotkey, press Ctrl + F12." +
                         "\nHotkeys won't work unless the Logger is open.");
                 }
-                else if (rbCtrlS.Checked)
+                else if (rbBackSlash.Checked)
                 {
-                    Form1.RegisterHotKey(this.Handle, 1, 0x0002, 0x53); // Ctrl + S
+                    Form1.RegisterHotKey(this.Handle, 1, 0x0000, 0xDC); //  \ 
                     this.Visible = false;
                     MessageBox.Show("To pause/disable the hotkey, press Ctrl + F12." +
                         "\nHotkeys won't work unless the Logger is open.");
@@ -116,8 +115,6 @@ namespace screenshotmacro
             }
             else
                 MessageBox.Show("Please open the Logger first.", "Error");
-
-
         }
 
         public static bool isProcessFocused(int processId)
@@ -163,51 +160,51 @@ namespace screenshotmacro
         protected override void WndProc(ref Message m)
         {
             Process[] logger = Process.GetProcessesByName("Synergy.BaseballLogger.WinApp");
-            if (m.Msg == 0x0312)
+            if (m.Msg == 0x0312) // detect a hotkey
             {
-                if (logger.Length != 0)
+                IntPtr i = m.WParam; // which hotkey was pressed
+                if (logger.Length != 0) // if logger is running because isProcessFocused(logger[0].Id) breaks if array is empty
                 {
-                    if (isProcessFocused(logger[0].Id))
+                    if (isProcessFocused(logger[0].Id)) //if logger is focused
                     {
-                        IntPtr i = m.WParam;
                         if ((int)i == 1)
                         {
+                            MessageBox.Show("clicked hotkey");
                             Graphics g = Graphics.FromImage(ss);
                             Size s = new Size(ss.Width, ss.Height);
                             g.CopyFromScreen(0, 0, 0, 0, s);
                             //ss.Save(@"C:\Users\Leon\Desktop\ss.png");
-
-                            if (loggerIsRunning())
+                            GetPixels();
+                            this.Cursor = new Cursor(Cursor.Current.Handle);
+                            Point firstPos = Cursor.Position;
+                            if (pos != null)
                             {
-                                GetPixels();
-                                this.Cursor = new Cursor(Cursor.Current.Handle);
-                                Point firstPos = Cursor.Position;
-                                if (pos != null)
-                                {
-                                    Cursor.Position = new Point(pos.Item1 + 22, pos.Item2 + 13);
-                                    LeftClick();
-                                    Cursor.Position = firstPos;
-                                }
+                                Cursor.Position = new Point(pos.Item1 + 22, pos.Item2 + 13);
+                                LeftClick();
+                                Cursor.Position = firstPos;
                             }
                         }
-
+                        else
+                        {
+                            this.Visible = true;
+                            Form1.UnregisterHotKey(this.Handle, 1);
+                            Form1.UnregisterHotKey(this.Handle, 0);
+                            MessageBox.Show("Disabled hotkeys.");
+                        }
                     }
-
-                }
-                else
-                {
-                    this.Visible = true;
-                    Form1.UnregisterHotKey(this.Handle, 1);
-                    MessageBox.Show("Disabled hotkeys.");
+                    else
+                    {                      
+                        if ((int)i == 0)
+                        {
+                            this.Visible = true;
+                            Form1.UnregisterHotKey(this.Handle, 1);
+                            Form1.UnregisterHotKey(this.Handle, 0);
+                            MessageBox.Show("Disabled hotkeys.");
+                        }
+                    }
                 }
             }
-
             base.WndProc(ref m);
-        }
-        private void Form1_Shown(object sender, EventArgs e)
-        {
-
-
         }
 
         private void btnHelp_Click(object sender, EventArgs e)

@@ -9,3 +9,7 @@ C:\Users\Leon\Desktop\Projects\screenshotmacro\screenshotmacro\obj\Debug\screens
 C:\Users\Leon\Desktop\Projects\screenshotmacro\screenshotmacro\obj\Debug\screenshotmacro.exe
 C:\Users\Leon\Desktop\Projects\screenshotmacro\screenshotmacro\obj\Debug\screenshotmacro.pdb
 C:\Users\Leon\Desktop\Projects\screenshotmacro\screenshotmacro\obj\Debug\screenshotmacro.fHelp.resources
+C:\Users\Leon\Desktop\Projects\screenshotmacro\screenshotmacro\bin\Debug\screenshotmacro.exe.manifest
+C:\Users\Leon\Desktop\Projects\screenshotmacro\screenshotmacro\bin\Debug\screenshotmacro.application
+C:\Users\Leon\Desktop\Projects\screenshotmacro\screenshotmacro\obj\Debug\screenshotmacro.exe.manifest
+C:\Users\Leon\Desktop\Projects\screenshotmacro\screenshotmacro\obj\Debug\screenshotmacro.application
