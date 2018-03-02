@@ -15,13 +15,13 @@ namespace screenshotmacro
 {
     public partial class Form1 : Form
     {
-
         public Form1()
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             btnStopClick.Enabled = false;
+            timer1.Enabled = false;
         }
 
         #region Dll imports
@@ -87,6 +87,7 @@ namespace screenshotmacro
                 //    MessageBox.Show("k den bb");
                 //    Application.Exit();
                 //}
+
                 //   Form1.RegisterHotKey(this.Handle, 1, 0x0000, 0x20);
                 //                            handle, id, modifier key, key
                 // id - your own numeber to differentiate between hotkeys
@@ -133,7 +134,9 @@ namespace screenshotmacro
             //copied code i dont understand lol
             IntPtr fgWin = GetForegroundWindow();
             if (fgWin == IntPtr.Zero)
+            {
                 return false;
+            }
             int fgProc;
             GetWindowThreadProcessId(fgWin, out fgProc);
             return processId == fgProc;
@@ -233,9 +236,9 @@ namespace screenshotmacro
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            Process[] logger = Process.GetProcessesByName("Synergy Logger Dashboard");
-            if (isProcessFocused(logger[0].Id))
-                LeftClick();
+            Process[] dashboard = Process.GetProcessesByName("Synergy Logger Dashboard");
+            if (isProcessFocused(dashboard[0].Id))
+                LeftClick();       
         }
 
         private void btnStartClick_Click(object sender, EventArgs e)
