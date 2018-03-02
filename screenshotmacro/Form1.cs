@@ -84,6 +84,9 @@ namespace screenshotmacro
 
                 //   Form1.RegisterHotKey(this.Handle, 1, 0x0000, 0x20);
                 //                            handle, id, modifier key, key
+                // id - your own numeber to differentiate between hotkeys
+                // modifier - ctrl, shift, alt etc.
+                //
 
                 if (rbSpace.Checked)
                 {
