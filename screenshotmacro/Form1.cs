@@ -63,6 +63,7 @@ namespace screenshotmacro
         private void Form1_Load(object sender, EventArgs e)
         {
             ss = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, PixelFormat.Format32bppArgb);
+            timer1.Interval = 1000;
         }
 
         private void btnStart_Click(object sender, EventArgs e)
@@ -70,7 +71,6 @@ namespace screenshotmacro
             Form1.RegisterHotKey(this.Handle, 0, 0x0002, 0x7B); // Ctrl + F12  
             if (loggerIsRunning())
             {
-
                 //DialogResult dialogResult = MessageBox.Show("Do you want to open the Logger?", "Logger not running", MessageBoxButtons.YesNo);
                 //if (dialogResult == DialogResult.Yes)
                 //{
@@ -81,6 +81,9 @@ namespace screenshotmacro
                 //    MessageBox.Show("k den bb");
                 //    Application.Exit();
                 //}
+
+                //   Form1.RegisterHotKey(this.Handle, 1, 0x0000, 0x20);
+                //                            handle, id, modifier key, key
 
                 if (rbSpace.Checked)
                 {
@@ -119,11 +122,10 @@ namespace screenshotmacro
 
         public static bool isProcessFocused(int processId)
         {
+            //copied code i dont understand lol
             IntPtr fgWin = GetForegroundWindow();
             if (fgWin == IntPtr.Zero)
-            {
                 return false;
-            }
             int fgProc;
             GetWindowThreadProcessId(fgWin, out fgProc);
             return processId == fgProc;
@@ -140,25 +142,25 @@ namespace screenshotmacro
 
         private Tuple<int, int> GetPixels()
         {
+            // makes a pair of x,y for where the color was found in the screenshot
+
             // green from the apply button
             Color c = Color.FromArgb(30, 165, 46);
 
-            for (int y = Screen.PrimaryScreen.Bounds.Height / 2; y < ss.Height; y++)
-            {
-                for (int x = Screen.PrimaryScreen.Bounds.Width / 3; x < ss.Width; x++)
-                {
+            for (int y = 5 * Screen.PrimaryScreen.Bounds.Height / 6; y < ss.Height; y++)
+                for (int x = 2 * Screen.PrimaryScreen.Bounds.Width / 5; x < ss.Width; x++)
                     if (ss.GetPixel(x, y) == c)
                     {
                         pos = Tuple.Create(x, y);
                         return pos;
                     }
-                }
-            }
             return null;
         }
 
         protected override void WndProc(ref Message m)
         {
+            // processes windows messages
+
             Process[] logger = Process.GetProcessesByName("Synergy.BaseballLogger.WinApp");
             if (m.Msg == 0x0312) // detect a hotkey
             {
@@ -169,7 +171,6 @@ namespace screenshotmacro
                     {
                         if ((int)i == 1)
                         {
-                            MessageBox.Show("clicked hotkey");
                             Graphics g = Graphics.FromImage(ss);
                             Size s = new Size(ss.Width, ss.Height);
                             g.CopyFromScreen(0, 0, 0, 0, s);
@@ -193,7 +194,7 @@ namespace screenshotmacro
                         }
                     }
                     else
-                    {                      
+                    {
                         if ((int)i == 0)
                         {
                             this.Visible = true;
@@ -211,6 +212,23 @@ namespace screenshotmacro
         {
             fHelp h = new fHelp();
             h.Show();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            Process[] logger = Process.GetProcessesByName("Synergy Logger Dashboard");
+            if (isProcessFocused(logger[0].Id))
+                LeftClick();
+        }
+
+        private void btnStartClick_Click(object sender, EventArgs e)
+        {
+            timer1.Start();
+        }
+
+        private void btnStopClick_Click(object sender, EventArgs e)
+        {
+            timer1.Stop();
         }
     }
 }

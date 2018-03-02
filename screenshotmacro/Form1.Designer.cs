@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.btnStart = new System.Windows.Forms.Button();
             this.rbSpace = new System.Windows.Forms.RadioButton();
@@ -36,15 +37,19 @@
             this.rbBackSlash = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
             this.btnHelp = new System.Windows.Forms.Button();
+            this.btnStartClick = new System.Windows.Forms.Button();
+            this.btnStopClick = new System.Windows.Forms.Button();
+            this.lbClick = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(118, 109);
+            this.btnStart.Location = new System.Drawing.Point(60, 109);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(75, 25);
+            this.btnStart.Size = new System.Drawing.Size(117, 25);
             this.btnStart.TabIndex = 0;
-            this.btnStart.Text = "Start ";
+            this.btnStart.Text = "Enable hotkey";
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
@@ -111,11 +116,47 @@
             this.btnHelp.UseVisualStyleBackColor = true;
             this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
             // 
+            // btnStartClick
+            // 
+            this.btnStartClick.Location = new System.Drawing.Point(12, 176);
+            this.btnStartClick.Name = "btnStartClick";
+            this.btnStartClick.Size = new System.Drawing.Size(75, 25);
+            this.btnStartClick.TabIndex = 7;
+            this.btnStartClick.Text = "Start";
+            this.btnStartClick.UseVisualStyleBackColor = true;
+            this.btnStartClick.Click += new System.EventHandler(this.btnStartClick_Click);
+            // 
+            // btnStopClick
+            // 
+            this.btnStopClick.Location = new System.Drawing.Point(118, 176);
+            this.btnStopClick.Name = "btnStopClick";
+            this.btnStopClick.Size = new System.Drawing.Size(75, 25);
+            this.btnStopClick.TabIndex = 8;
+            this.btnStopClick.Text = "Stop";
+            this.btnStopClick.UseVisualStyleBackColor = true;
+            this.btnStopClick.Click += new System.EventHandler(this.btnStopClick_Click);
+            // 
+            // lbClick
+            // 
+            this.lbClick.AutoSize = true;
+            this.lbClick.Location = new System.Drawing.Point(12, 151);
+            this.lbClick.Name = "lbClick";
+            this.lbClick.Size = new System.Drawing.Size(155, 13);
+            this.lbClick.TabIndex = 9;
+            this.lbClick.Text = "Autoclick for requesting games:";
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(212, 153);
+            this.ClientSize = new System.Drawing.Size(201, 214);
+            this.Controls.Add(this.lbClick);
+            this.Controls.Add(this.btnStopClick);
+            this.Controls.Add(this.btnStartClick);
             this.Controls.Add(this.btnHelp);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.rbBackSlash);
@@ -126,7 +167,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-        
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -141,6 +181,10 @@
         private System.Windows.Forms.RadioButton rbBackSlash;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnHelp;
+        private System.Windows.Forms.Button btnStartClick;
+        private System.Windows.Forms.Button btnStopClick;
+        private System.Windows.Forms.Label lbClick;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

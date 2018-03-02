@@ -16,6 +16,8 @@ namespace screenshotmacro
         {
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point(Screen.PrimaryScreen.Bounds.Width / 2 - this.Width / 2 - 100, Screen.PrimaryScreen.Bounds.Height / 2 - this.Height / 2);
         }
 
         string about =
@@ -38,16 +40,6 @@ namespace screenshotmacro
             tbEmail.BorderStyle = 0;
             tbEmail.BackColor = this.BackColor;
             tbEmail.TabStop = false;
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void fHelp_FormClosed(object sender, FormClosedEventArgs e)
-        {
-  
         }
     }
 }

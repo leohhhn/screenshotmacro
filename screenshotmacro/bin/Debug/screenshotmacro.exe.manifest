@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="screenshotmacro.exe" size="73104">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="screenshotmacro.exe" size="74640">
       <assemblyIdentity name="screenshotmacro" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>k98viBrR33nl6vyJ+9R5MiJHMmJH+DGM5TV87awQMno=</dsig:DigestValue>
+        <dsig:DigestValue>i29c0dSey/ItcHDKt1eqPuG5vGK4k8F9Yi0E01QGA1E=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
