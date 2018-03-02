@@ -21,6 +21,7 @@ namespace screenshotmacro
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            btnStopClick.Enabled = false;
         }
 
         #region Dll imports
@@ -59,6 +60,7 @@ namespace screenshotmacro
 
         Bitmap ss;
         Tuple<int, int> pos;
+        bool onlyApply = true;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -69,6 +71,10 @@ namespace screenshotmacro
         private void btnStart_Click(object sender, EventArgs e)
         {
             Form1.RegisterHotKey(this.Handle, 0, 0x0002, 0x7B); // Ctrl + F12  
+
+            if (cbBoth.Checked)
+                onlyApply = false;
+
             if (loggerIsRunning())
             {
                 //DialogResult dialogResult = MessageBox.Show("Do you want to open the Logger?", "Logger not running", MessageBoxButtons.YesNo);
@@ -81,7 +87,6 @@ namespace screenshotmacro
                 //    MessageBox.Show("k den bb");
                 //    Application.Exit();
                 //}
-
                 //   Form1.RegisterHotKey(this.Handle, 1, 0x0000, 0x20);
                 //                            handle, id, modifier key, key
                 // id - your own numeber to differentiate between hotkeys
@@ -93,28 +98,28 @@ namespace screenshotmacro
                     Form1.RegisterHotKey(this.Handle, 1, 0x0000, 0x20); // Space
                     this.Visible = false;
                     MessageBox.Show("To pause/disable the hotkey, press Ctrl + F12." +
-                        "\nHotkeys won't work unless the Logger is open.");
+                             "\nHotkeys won't work unless the Logger is open and in fullscreen mode.");
                 }
                 else if (rbCtrlE.Checked)
                 {
                     Form1.RegisterHotKey(this.Handle, 1, 0x0002, 0x45); // Ctrl + E
                     this.Visible = false;
                     MessageBox.Show("To pause/disable the hotkey, press Ctrl + F12." +
-                        "\nHotkeys won't work unless the Logger is open.");
+                       "\nHotkeys won't work unless the Logger is open and in fullscreen mode.");
                 }
                 else if (rbBackSlash.Checked)
                 {
                     Form1.RegisterHotKey(this.Handle, 1, 0x0000, 0xDC); //  \ 
                     this.Visible = false;
                     MessageBox.Show("To pause/disable the hotkey, press Ctrl + F12." +
-                        "\nHotkeys won't work unless the Logger is open.");
+                                        "\nHotkeys won't work unless the Logger is open and in fullscreen mode.");
                 }
                 else if (rbCtrlF.Checked)
                 {
                     Form1.RegisterHotKey(this.Handle, 1, 0x0002, 0x46); // Ctrl + F
                     this.Visible = false;
                     MessageBox.Show("To pause/disable the hotkey, press Ctrl + F12." +
-                        "\nHotkeys won't work unless the Logger is open.");
+                        "\nHotkeys won't work unless the Logger is open and in fullscreen mode.");
                 }
                 else
                     MessageBox.Show("Please select a hotkey.", "Error");
@@ -183,9 +188,20 @@ namespace screenshotmacro
                             Point firstPos = Cursor.Position;
                             if (pos != null)
                             {
-                                Cursor.Position = new Point(pos.Item1 + 22, pos.Item2 + 13);
-                                LeftClick();
-                                Cursor.Position = firstPos;
+                                if (onlyApply)
+                                {
+                                    Cursor.Position = new Point(pos.Item1 + 22, pos.Item2 + 13);
+                                    LeftClick();
+                                    Cursor.Position = firstPos;
+                                }
+                                else
+                                {
+                                    Cursor.Position = new Point(pos.Item1 + 22, pos.Item2 + 13);
+                                    LeftClick();
+                                    Cursor.Position = new Point(pos.Item1 + 253, pos.Item2 + 13);
+                                    LeftClick();
+                                    Cursor.Position = firstPos;
+                                }
                             }
                         }
                         else
@@ -193,7 +209,6 @@ namespace screenshotmacro
                             this.Visible = true;
                             Form1.UnregisterHotKey(this.Handle, 1);
                             Form1.UnregisterHotKey(this.Handle, 0);
-                            MessageBox.Show("Disabled hotkeys.");
                         }
                     }
                     else
@@ -203,7 +218,6 @@ namespace screenshotmacro
                             this.Visible = true;
                             Form1.UnregisterHotKey(this.Handle, 1);
                             Form1.UnregisterHotKey(this.Handle, 0);
-                            MessageBox.Show("Disabled hotkeys.");
                         }
                     }
                 }
@@ -227,11 +241,15 @@ namespace screenshotmacro
         private void btnStartClick_Click(object sender, EventArgs e)
         {
             timer1.Start();
+            btnStopClick.Enabled = true;
+            btnStartClick.Enabled = false;
         }
 
         private void btnStopClick_Click(object sender, EventArgs e)
         {
             timer1.Stop();
+            btnStopClick.Enabled = false;
+            btnStartClick.Enabled = true;
         }
     }
 }

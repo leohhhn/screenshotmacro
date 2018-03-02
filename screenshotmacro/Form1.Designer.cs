@@ -41,13 +41,14 @@
             this.btnStopClick = new System.Windows.Forms.Button();
             this.lbClick = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.cbBoth = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(60, 109);
+            this.btnStart.Location = new System.Drawing.Point(61, 108);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(117, 25);
+            this.btnStart.Size = new System.Drawing.Size(129, 25);
             this.btnStart.TabIndex = 0;
             this.btnStart.Text = "Enable hotkey";
             this.btnStart.UseVisualStyleBackColor = true;
@@ -56,7 +57,7 @@
             // rbSpace
             // 
             this.rbSpace.AutoSize = true;
-            this.rbSpace.Location = new System.Drawing.Point(15, 52);
+            this.rbSpace.Location = new System.Drawing.Point(16, 30);
             this.rbSpace.Name = "rbSpace";
             this.rbSpace.Size = new System.Drawing.Size(56, 17);
             this.rbSpace.TabIndex = 1;
@@ -67,7 +68,7 @@
             // rbCtrlF
             // 
             this.rbCtrlF.AutoSize = true;
-            this.rbCtrlF.Location = new System.Drawing.Point(15, 75);
+            this.rbCtrlF.Location = new System.Drawing.Point(16, 53);
             this.rbCtrlF.Name = "rbCtrlF";
             this.rbCtrlF.Size = new System.Drawing.Size(58, 17);
             this.rbCtrlF.TabIndex = 2;
@@ -78,7 +79,7 @@
             // rbCtrlE
             // 
             this.rbCtrlE.AutoSize = true;
-            this.rbCtrlE.Location = new System.Drawing.Point(118, 52);
+            this.rbCtrlE.Location = new System.Drawing.Point(119, 30);
             this.rbCtrlE.Name = "rbCtrlE";
             this.rbCtrlE.Size = new System.Drawing.Size(59, 17);
             this.rbCtrlE.TabIndex = 3;
@@ -89,7 +90,7 @@
             // rbBackSlash
             // 
             this.rbBackSlash.AutoSize = true;
-            this.rbBackSlash.Location = new System.Drawing.Point(118, 75);
+            this.rbBackSlash.Location = new System.Drawing.Point(119, 53);
             this.rbBackSlash.Name = "rbBackSlash";
             this.rbBackSlash.Size = new System.Drawing.Size(30, 17);
             this.rbBackSlash.TabIndex = 4;
@@ -100,7 +101,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 20);
+            this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(107, 13);
             this.label1.TabIndex = 5;
@@ -108,7 +109,7 @@
             // 
             // btnHelp
             // 
-            this.btnHelp.Location = new System.Drawing.Point(15, 109);
+            this.btnHelp.Location = new System.Drawing.Point(16, 108);
             this.btnHelp.Name = "btnHelp";
             this.btnHelp.Size = new System.Drawing.Size(24, 25);
             this.btnHelp.TabIndex = 6;
@@ -118,7 +119,7 @@
             // 
             // btnStartClick
             // 
-            this.btnStartClick.Location = new System.Drawing.Point(12, 176);
+            this.btnStartClick.Location = new System.Drawing.Point(13, 165);
             this.btnStartClick.Name = "btnStartClick";
             this.btnStartClick.Size = new System.Drawing.Size(75, 25);
             this.btnStartClick.TabIndex = 7;
@@ -128,7 +129,7 @@
             // 
             // btnStopClick
             // 
-            this.btnStopClick.Location = new System.Drawing.Point(118, 176);
+            this.btnStopClick.Location = new System.Drawing.Point(119, 165);
             this.btnStopClick.Name = "btnStopClick";
             this.btnStopClick.Size = new System.Drawing.Size(75, 25);
             this.btnStopClick.TabIndex = 8;
@@ -139,7 +140,7 @@
             // lbClick
             // 
             this.lbClick.AutoSize = true;
-            this.lbClick.Location = new System.Drawing.Point(12, 151);
+            this.lbClick.Location = new System.Drawing.Point(14, 143);
             this.lbClick.Name = "lbClick";
             this.lbClick.Size = new System.Drawing.Size(155, 13);
             this.lbClick.TabIndex = 9;
@@ -149,11 +150,22 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // cbBoth
+            // 
+            this.cbBoth.AutoSize = true;
+            this.cbBoth.Location = new System.Drawing.Point(41, 81);
+            this.cbBoth.Name = "cbBoth";
+            this.cbBoth.Size = new System.Drawing.Size(113, 17);
+            this.cbBoth.TabIndex = 10;
+            this.cbBoth.Text = "Apply + Next Pitch";
+            this.cbBoth.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(201, 214);
+            this.ClientSize = new System.Drawing.Size(201, 204);
+            this.Controls.Add(this.cbBoth);
             this.Controls.Add(this.lbClick);
             this.Controls.Add(this.btnStopClick);
             this.Controls.Add(this.btnStartClick);
@@ -185,6 +197,7 @@
         private System.Windows.Forms.Button btnStopClick;
         private System.Windows.Forms.Label lbClick;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.CheckBox cbBoth;
     }
 }
 

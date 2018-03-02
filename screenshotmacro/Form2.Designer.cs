@@ -58,14 +58,13 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 1);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(310, 211);
+            this.groupBox1.Size = new System.Drawing.Size(310, 200);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
-
             // 
             // tbEmail
             // 
-            this.tbEmail.Location = new System.Drawing.Point(9, 178);
+            this.tbEmail.Location = new System.Drawing.Point(9, 160);
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.Size = new System.Drawing.Size(149, 20);
             this.tbEmail.TabIndex = 4;
@@ -73,7 +72,7 @@
             // 
             // lBug
             // 
-            this.lBug.Location = new System.Drawing.Point(6, 160);
+            this.lBug.Location = new System.Drawing.Point(6, 146);
             this.lBug.Name = "lBug";
             this.lBug.Size = new System.Drawing.Size(298, 15);
             this.lBug.TabIndex = 3;
@@ -81,7 +80,7 @@
             // 
             // lCr
             // 
-            this.lCr.Location = new System.Drawing.Point(193, 183);
+            this.lCr.Location = new System.Drawing.Point(193, 179);
             this.lCr.Name = "lCr";
             this.lCr.Size = new System.Drawing.Size(111, 15);
             this.lCr.TabIndex = 2;
@@ -89,7 +88,7 @@
             // 
             // lInsrt
             // 
-            this.lInsrt.Location = new System.Drawing.Point(6, 50);
+            this.lInsrt.Location = new System.Drawing.Point(6, 45);
             this.lInsrt.Name = "lInsrt";
             this.lInsrt.Size = new System.Drawing.Size(205, 44);
             this.lInsrt.TabIndex = 1;
@@ -98,24 +97,22 @@
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(9, 94);
+            this.label1.Location = new System.Drawing.Point(6, 89);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(295, 56);
             this.label1.TabIndex = 5;
-            this.label1.Text = "The autoclick option clicks the \"Request Game\" button in the Logger Dashboard, bu" +
-    "t only if the Dashboard is focused (the current selected window). Place the mous" +
-    "e on the button itself to make it work.";
-
+            this.label1.Text = "The autoclick option simply clicks the the left mouse button while the Dashboard " +
+    "is focused (the current selected window). Place the mouse on the button itself t" +
+    "o make it work.";
             // 
             // fHelp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(334, 219);
+            this.ClientSize = new System.Drawing.Size(334, 207);
             this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "fHelp";
-
             this.Load += new System.EventHandler(this.fHelp_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

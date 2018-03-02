@@ -25,7 +25,7 @@ namespace screenshotmacro
         string howto =
             "First, select a hotkey you want to use.\nSecond, make sure the Logger is running.\nLast, click start.";
         string cr = "© 2018 OutOfBounds";
-        string bug = "If you find any bugs, please e-mail me at";
+        string bug = "If you find any bugs or have suggestions, please e-mail me at";
         string email = "outofbounds@protonmail.com";
 
         private void fHelp_Load(object sender, EventArgs e)
@@ -41,5 +41,7 @@ namespace screenshotmacro
             tbEmail.BackColor = this.BackColor;
             tbEmail.TabStop = false;
         }
+
+      
     }
 }
