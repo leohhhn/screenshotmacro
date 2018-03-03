@@ -225,6 +225,12 @@ namespace screenshotmacro
                         }
                     }
                 }
+                if ((int)i == 0)
+                {
+                    this.Visible = true;
+                    Form1.UnregisterHotKey(this.Handle, 1);
+                    Form1.UnregisterHotKey(this.Handle, 0);
+                }
             }
             base.WndProc(ref m);
         }
