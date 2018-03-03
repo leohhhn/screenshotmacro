@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using Microsoft.VisualBasic;
+using System.Threading;
 
 namespace screenshotmacro
 {
