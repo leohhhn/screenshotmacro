@@ -1,1 +1,1 @@
-To get the latest version of the program, go to https://github.com/leonhudak/screenshotmacro/tree/master/screenshotmacro/bin/Debug and download "screenshotmacro.exe". That is the program.
+Get the latest version of the program here: https://github.com/leonhudak/screenshotmacro/blob/master/screenshotmacro/bin/Debug/screenshotmacro.exe
