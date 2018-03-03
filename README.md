@@ -1,1 +1,1 @@
-A simple program that finds the button "Apply" in the Synergy Baseball logger and presses it when a hotkey is detected.
+To get the latest version of the program, go to https://github.com/leonhudak/screenshotmacro/tree/master/screenshotmacro/bin/Debug and download "screenshotmacro.exe". That is the program.
