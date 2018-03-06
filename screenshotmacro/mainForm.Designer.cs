@@ -1,6 +1,6 @@
 ﻿namespace screenshotmacro
 {
-    partial class Form1
+    partial class mainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainForm));
             this.btnStart = new System.Windows.Forms.Button();
             this.rbSpace = new System.Windows.Forms.RadioButton();
             this.rbCtrlF = new System.Windows.Forms.RadioButton();
@@ -142,9 +142,9 @@
             this.lbClick.AutoSize = true;
             this.lbClick.Location = new System.Drawing.Point(14, 143);
             this.lbClick.Name = "lbClick";
-            this.lbClick.Size = new System.Drawing.Size(155, 13);
+            this.lbClick.Size = new System.Drawing.Size(68, 13);
             this.lbClick.TabIndex = 9;
-            this.lbClick.Text = "Autoclick for requesting games:";
+            this.lbClick.Text = "Autoclicking:";
             // 
             // timer1
             // 
@@ -160,7 +160,7 @@
             this.cbBoth.Text = "Apply + Next Pitch";
             this.cbBoth.UseVisualStyleBackColor = true;
             // 
-            // Form1
+            // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -177,7 +177,7 @@
             this.Controls.Add(this.rbSpace);
             this.Controls.Add(this.btnStart);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Form1";
+            this.Name = "mainForm";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

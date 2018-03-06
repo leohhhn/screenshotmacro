@@ -10,14 +10,14 @@ using System.Windows.Forms;
 
 namespace screenshotmacro
 {
-    public partial class timeInput : Form
+    public partial class timeInputForm : Form
     {
         public string stopTime;
         public bool clicked = false;
-        public bool closed = false;
-        public timeInput()
+        private mainForm f;
+        public timeInputForm(mainForm f)
         {
-
+            this.f = f;
             InitializeComponent();
             timePicker.Format = DateTimePickerFormat.Time;
             timePicker.ShowUpDown = true;
@@ -31,12 +31,12 @@ namespace screenshotmacro
         {
             clicked = true;
             stopTime = timePicker.Value.ToShortTimeString();
-            Dispose();
+            Close();
         }
 
         private void timeInput_FormClosed(object sender, FormClosedEventArgs e)
         {
-            closed = true;
+            f.timerFormCallback(clicked);
         }
     }
 }

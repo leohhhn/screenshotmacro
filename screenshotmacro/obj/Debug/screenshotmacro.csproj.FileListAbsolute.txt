@@ -19,7 +19,6 @@ E:\Projects\screenshotmacro\screenshotmacro\bin\Debug\screenshotmacro.applicatio
 E:\Projects\screenshotmacro\screenshotmacro\bin\Debug\screenshotmacro.exe
 E:\Projects\screenshotmacro\screenshotmacro\bin\Debug\screenshotmacro.pdb
 E:\Projects\screenshotmacro\screenshotmacro\obj\Debug\screenshotmacro.csprojResolveAssemblyReference.cache
-E:\Projects\screenshotmacro\screenshotmacro\obj\Debug\screenshotmacro.Form1.resources
 E:\Projects\screenshotmacro\screenshotmacro\obj\Debug\screenshotmacro.fHelp.resources
 E:\Projects\screenshotmacro\screenshotmacro\obj\Debug\screenshotmacro.Properties.Resources.resources
 E:\Projects\screenshotmacro\screenshotmacro\obj\Debug\screenshotmacro.csproj.GenerateResource.Cache
@@ -28,4 +27,5 @@ E:\Projects\screenshotmacro\screenshotmacro\obj\Debug\screenshotmacro.exe.manife
 E:\Projects\screenshotmacro\screenshotmacro\obj\Debug\screenshotmacro.application
 E:\Projects\screenshotmacro\screenshotmacro\obj\Debug\screenshotmacro.exe
 E:\Projects\screenshotmacro\screenshotmacro\obj\Debug\screenshotmacro.pdb
-E:\Projects\screenshotmacro\screenshotmacro\obj\Debug\screenshotmacro.timeInput.resources
+E:\Projects\screenshotmacro\screenshotmacro\obj\Debug\screenshotmacro.mainForm.resources
+E:\Projects\screenshotmacro\screenshotmacro\obj\Debug\screenshotmacro.timeInputForm.resources

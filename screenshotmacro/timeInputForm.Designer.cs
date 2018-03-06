@@ -1,6 +1,6 @@
 ﻿namespace screenshotmacro
 {
-    partial class timeInput
+    partial class timeInputForm
     {
         /// <summary>
         /// Required designer variable.

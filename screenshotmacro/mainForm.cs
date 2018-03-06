@@ -14,9 +14,9 @@ using System.Threading;
 
 namespace screenshotmacro
 {
-    public partial class Form1 : Form
+    public partial class mainForm : Form
     {
-        public Form1()
+        public mainForm()
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -62,7 +62,7 @@ namespace screenshotmacro
         Bitmap ss;
         Tuple<int, int> pos;
         bool onlyApply = true;
-        timeInput ti;
+        timeInputForm ti;
         Color requestBtnFaded = Color.FromArgb(166, 209, 239);
         Process[] dashboard;
         public int positionX;
@@ -76,7 +76,7 @@ namespace screenshotmacro
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            Form1.RegisterHotKey(this.Handle, 0, 0x0002, 0x7B); // Ctrl + F12  
+            mainForm.RegisterHotKey(this.Handle, 0, 0x0002, 0x7B); // Ctrl + F12  
 
             if (cbBoth.Checked)
                 onlyApply = false;
@@ -102,28 +102,28 @@ namespace screenshotmacro
 
                 if (rbSpace.Checked)
                 {
-                    Form1.RegisterHotKey(this.Handle, 1, 0x0000, 0x20); // Space
+                    mainForm.RegisterHotKey(this.Handle, 1, 0x0000, 0x20); // Space
                     this.Visible = false;
                     MessageBox.Show("To pause/disable the hotkey, press Ctrl + F12." +
                              "\nHotkeys won't work unless the Logger is open and in fullscreen mode.");
                 }
                 else if (rbCtrlE.Checked)
                 {
-                    Form1.RegisterHotKey(this.Handle, 1, 0x0002, 0x45); // Ctrl + E
+                    mainForm.RegisterHotKey(this.Handle, 1, 0x0002, 0x45); // Ctrl + E
                     this.Visible = false;
                     MessageBox.Show("To pause/disable the hotkey, press Ctrl + F12." +
                        "\nHotkeys won't work unless the Logger is open and in fullscreen mode.");
                 }
                 else if (rbBackSlash.Checked)
                 {
-                    Form1.RegisterHotKey(this.Handle, 1, 0x0000, 0xDC); //  \ 
+                    mainForm.RegisterHotKey(this.Handle, 1, 0x0000, 0xDC); //  \ 
                     this.Visible = false;
                     MessageBox.Show("To pause/disable the hotkey, press Ctrl + F12." +
                                         "\nHotkeys won't work unless the Logger is open and in fullscreen mode.");
                 }
                 else if (rbCtrlF.Checked)
                 {
-                    Form1.RegisterHotKey(this.Handle, 1, 0x0002, 0x46); // Ctrl + F
+                    mainForm.RegisterHotKey(this.Handle, 1, 0x0002, 0x46); // Ctrl + F
                     this.Visible = false;
                     MessageBox.Show("To pause/disable the hotkey, press Ctrl + F12." +
                         "\nHotkeys won't work unless the Logger is open and in fullscreen mode.");
@@ -216,8 +216,8 @@ namespace screenshotmacro
                         else
                         {
                             this.Visible = true;
-                            Form1.UnregisterHotKey(this.Handle, 1);
-                            Form1.UnregisterHotKey(this.Handle, 0);
+                            mainForm.UnregisterHotKey(this.Handle, 1);
+                            mainForm.UnregisterHotKey(this.Handle, 0);
                         }
                     }
                     else
@@ -225,16 +225,16 @@ namespace screenshotmacro
                         if ((int)i == 0)
                         {
                             this.Visible = true;
-                            Form1.UnregisterHotKey(this.Handle, 1);
-                            Form1.UnregisterHotKey(this.Handle, 0);
+                            mainForm.UnregisterHotKey(this.Handle, 1);
+                            mainForm.UnregisterHotKey(this.Handle, 0);
                         }
                     }
                 }
                 if ((int)i == 0)
                 {
                     this.Visible = true;
-                    Form1.UnregisterHotKey(this.Handle, 1);
-                    Form1.UnregisterHotKey(this.Handle, 0);
+                    mainForm.UnregisterHotKey(this.Handle, 1);
+                    mainForm.UnregisterHotKey(this.Handle, 0);
                 }
             }
             base.WndProc(ref m);
@@ -244,6 +244,15 @@ namespace screenshotmacro
         {
             fHelp h = new fHelp();
             h.Show();
+        }
+
+        public void timerFormCallback(bool clicked) {
+            if (clicked)
+            {
+                timer1.Start();
+                btnStopClick.Enabled = true;
+                btnStartClick.Enabled = false;        
+            }
         }
 
         private void btnStartClick_Click(object sender, EventArgs e)
@@ -256,18 +265,8 @@ namespace screenshotmacro
                 MessageBox.Show("Please open the Dashboard first.");
             else
             {
-                ti = new timeInput();
-                ti.Show();
-                if (ti.closed)
-                {
-                    // to do add do sth only when closed
-                    if (ti.clicked)
-                    {
-                        timer1.Start();
-                        btnStopClick.Enabled = true;
-                        btnStartClick.Enabled = false;
-                    }
-                }
+                ti = new timeInputForm(this);
+                ti.Show();             
             }
         }
 
