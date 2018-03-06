@@ -62,6 +62,11 @@ namespace screenshotmacro
         Bitmap ss;
         Tuple<int, int> pos;
         bool onlyApply = true;
+        timeInput ti;
+        Color requestBtnFaded = Color.FromArgb(166, 209, 239);
+        Process[] dashboard;
+        public int positionX;
+        public int positionY;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -241,18 +246,39 @@ namespace screenshotmacro
             h.Show();
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            Process[] dashboard = Process.GetProcessesByName("Synergy Logger Dashboard");
-            if (isProcessFocused(dashboard[0].Id))
-                LeftClick();       
-        }
-
         private void btnStartClick_Click(object sender, EventArgs e)
         {
-            timer1.Start();
-            btnStopClick.Enabled = true;
-            btnStartClick.Enabled = false;
+            dashboard = Process.GetProcessesByName("Synergy Logger Dashboard");
+            positionX = this.Left;
+            positionY = this.Top;
+
+            if (dashboard.Length == 0)
+                MessageBox.Show("Please open the Dashboard first.");
+            else
+            {
+                ti = new timeInput();
+                ti.Show();
+                if (ti.closed)
+                {
+                    // to do add do sth only when closed
+                    if (ti.clicked)
+                    {
+                        timer1.Start();
+                        btnStopClick.Enabled = true;
+                        btnStartClick.Enabled = false;
+                    }
+                }
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            string currentTime = DateTime.Now.ToShortTimeString();
+            if (currentTime == ti.stopTime)
+                timer1.Stop();
+            foreach (Process p in dashboard)
+                if (isProcessFocused(p.Id))
+                    LeftClick();
         }
 
         private void btnStopClick_Click(object sender, EventArgs e)

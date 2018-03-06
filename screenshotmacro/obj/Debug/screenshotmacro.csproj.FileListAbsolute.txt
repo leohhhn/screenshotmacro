@@ -28,3 +28,4 @@ E:\Projects\screenshotmacro\screenshotmacro\obj\Debug\screenshotmacro.exe.manife
 E:\Projects\screenshotmacro\screenshotmacro\obj\Debug\screenshotmacro.application
 E:\Projects\screenshotmacro\screenshotmacro\obj\Debug\screenshotmacro.exe
 E:\Projects\screenshotmacro\screenshotmacro\obj\Debug\screenshotmacro.pdb
+E:\Projects\screenshotmacro\screenshotmacro\obj\Debug\screenshotmacro.timeInput.resources
