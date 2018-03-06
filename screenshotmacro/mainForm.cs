@@ -246,12 +246,14 @@ namespace screenshotmacro
             h.Show();
         }
 
-        public void timerFormCallback(bool clicked) {
+        public void timerFormCallback(bool clicked)
+        {
             if (clicked)
             {
                 timer1.Start();
                 btnStopClick.Enabled = true;
-                btnStartClick.Enabled = false;        
+                btnStartClick.Enabled = false;
+
             }
         }
 
@@ -266,15 +268,21 @@ namespace screenshotmacro
             else
             {
                 ti = new timeInputForm(this);
-                ti.Show();             
+                ti.Show();
             }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            string currentTime = DateTime.Now.ToShortTimeString();
+            string currentTime = DateTime.Now.ToLongTimeString();
             if (currentTime == ti.stopTime)
+            {
                 timer1.Stop();
+                btnStopClick.Enabled = false;
+                btnStartClick.Enabled = true;
+                MessageBox.Show("Done clicking.");
+            }
+
             foreach (Process p in dashboard)
                 if (isProcessFocused(p.Id))
                     LeftClick();

@@ -59,7 +59,7 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // timeInput
+            // timeInputForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -67,7 +67,8 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.timePicker);
             this.Controls.Add(this.label1);
-            this.Name = "timeInput";
+            this.MaximizeBox = false;
+            this.Name = "timeInputForm";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.timeInput_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();

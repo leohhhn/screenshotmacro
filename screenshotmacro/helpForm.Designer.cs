@@ -112,6 +112,7 @@
             this.ClientSize = new System.Drawing.Size(334, 207);
             this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "fHelp";
             this.Load += new System.EventHandler(this.fHelp_Load);
             this.groupBox1.ResumeLayout(false);

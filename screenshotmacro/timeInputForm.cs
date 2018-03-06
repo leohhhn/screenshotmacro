@@ -30,7 +30,7 @@ namespace screenshotmacro
         private void button1_Click(object sender, EventArgs e)
         {
             clicked = true;
-            stopTime = timePicker.Value.ToShortTimeString();
+            stopTime = timePicker.Value.ToLongTimeString();
             Close();
         }
 
