@@ -59,14 +59,12 @@ namespace screenshotmacro
         }
         #endregion
 
-        Bitmap ss;
-        Tuple<int, int> pos;
+        Bitmap ss; // screenshot bitmap
+        Tuple<int, int> pos; // holds position of the pixel that has the needed color
         bool onlyApply = true;
         timeInputForm ti;
-        Color requestBtnFaded = Color.FromArgb(166, 209, 239);
         Process[] dashboard;
-        public int positionX;
-        public int positionY;
+        Random r = new Random();
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -76,30 +74,21 @@ namespace screenshotmacro
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            mainForm.RegisterHotKey(this.Handle, 0, 0x0002, 0x7B); // Ctrl + F12  
-
             if (cbBoth.Checked)
                 onlyApply = false;
 
             if (loggerIsRunning())
             {
-                //DialogResult dialogResult = MessageBox.Show("Do you want to open the Logger?", "Logger not running", MessageBoxButtons.YesNo);
-                //if (dialogResult == DialogResult.Yes)
-                //{
-                //    //   Process.Start(loggerpath);
-                //}
-                //else if (dialogResult == DialogResult.No)
-                //{
-                //    MessageBox.Show("k den bb");
-                //    Application.Exit();
-                //}
-
                 //   Form1.RegisterHotKey(this.Handle, 1, 0x0000, 0x20);
                 //                            handle, id, modifier key, key
                 // id - your own numeber to differentiate between hotkeys
                 // modifier - ctrl, shift, alt etc.
-                //
 
+                // Ctrl+F12 is used as the hotkey stopper
+
+                mainForm.RegisterHotKey(this.Handle, 0, 0x0002, 0x7B); // Ctrl + F12  
+
+                // registering hotkeys depending on user input
                 if (rbSpace.Checked)
                 {
                     mainForm.RegisterHotKey(this.Handle, 1, 0x0000, 0x20); // Space
@@ -137,7 +126,9 @@ namespace screenshotmacro
 
         public static bool isProcessFocused(int processId)
         {
-            //copied code i dont understand lol
+            // checking if a process is in focus
+            // don't really get this
+
             IntPtr fgWin = GetForegroundWindow();
             if (fgWin == IntPtr.Zero)
             {
@@ -150,6 +141,7 @@ namespace screenshotmacro
 
         private bool loggerIsRunning()
         {
+            // checking if the logger is running 
             Process[] logger = Process.GetProcessesByName("Synergy.BaseballLogger.WinApp");
             if (logger.Length == 0)
                 return false;
@@ -181,30 +173,33 @@ namespace screenshotmacro
             Process[] logger = Process.GetProcessesByName("Synergy.BaseballLogger.WinApp");
             if (m.Msg == 0x0312) // detect a hotkey
             {
-                IntPtr i = m.WParam; // which hotkey was pressed
-                if (logger.Length != 0) // if logger is running because isProcessFocused(logger[0].Id) breaks if array is empty
+                IntPtr i = m.WParam; // id of the hotkey that was pressed
+                if (logger.Length != 0) // isProcessFocused(logger[0].Id) breaks if array is empty
                 {
                     if (isProcessFocused(logger[0].Id)) //if logger is focused
                     {
-                        if ((int)i == 1)
+                        if ((int)i == 1) // look at hotkey IDs up
                         {
+                            // taking a screenshot
                             Graphics g = Graphics.FromImage(ss);
                             Size s = new Size(ss.Width, ss.Height);
                             g.CopyFromScreen(0, 0, 0, 0, s);
-                            //ss.Save(@"C:\Users\Leon\Desktop\ss.png");
                             GetPixels();
                             this.Cursor = new Cursor(Cursor.Current.Handle);
                             Point firstPos = Cursor.Position;
+
                             if (pos != null)
                             {
                                 if (onlyApply)
                                 {
+                                    // only clicks the apply button
                                     Cursor.Position = new Point(pos.Item1 + 22, pos.Item2 + 13);
                                     LeftClick();
                                     Cursor.Position = firstPos;
                                 }
                                 else
                                 {
+                                    // clicks both apply and next clip at once
                                     Cursor.Position = new Point(pos.Item1 + 22, pos.Item2 + 13);
                                     LeftClick();
                                     Cursor.Position = new Point(pos.Item1 + 253, pos.Item2 + 13);
@@ -215,6 +210,7 @@ namespace screenshotmacro
                         }
                         else
                         {
+                            // if Ctrl + F12 was pressed
                             this.Visible = true;
                             mainForm.UnregisterHotKey(this.Handle, 1);
                             mainForm.UnregisterHotKey(this.Handle, 0);
@@ -224,6 +220,7 @@ namespace screenshotmacro
                     {
                         if ((int)i == 0)
                         {
+                            // be able to unregister hotkeys even if the logger isn't focused
                             this.Visible = true;
                             mainForm.UnregisterHotKey(this.Handle, 1);
                             mainForm.UnregisterHotKey(this.Handle, 0);
@@ -232,6 +229,7 @@ namespace screenshotmacro
                 }
                 if ((int)i == 0)
                 {
+                    // be able to unregister even if the logger isn't running
                     this.Visible = true;
                     mainForm.UnregisterHotKey(this.Handle, 1);
                     mainForm.UnregisterHotKey(this.Handle, 0);
@@ -242,26 +240,25 @@ namespace screenshotmacro
 
         private void btnHelp_Click(object sender, EventArgs e)
         {
+            // opens the About (Help) form page
             fHelp h = new fHelp();
             h.Show();
         }
 
         public void timerFormCallback(bool clicked)
         {
+            // to be able to start the timer from timerInput
             if (clicked)
             {
                 timer1.Start();
                 btnStopClick.Enabled = true;
                 btnStartClick.Enabled = false;
-
             }
         }
 
         private void btnStartClick_Click(object sender, EventArgs e)
         {
             dashboard = Process.GetProcessesByName("Synergy Logger Dashboard");
-            positionX = this.Left;
-            positionY = this.Top;
 
             if (dashboard.Length == 0)
                 MessageBox.Show("Please open the Dashboard first.");
@@ -286,6 +283,13 @@ namespace screenshotmacro
             foreach (Process p in dashboard)
                 if (isProcessFocused(p.Id))
                     LeftClick();
+
+            // randomizes autoclicking
+            int rand = r.Next(3);
+            if (rand == 0 || rand == 1)
+                timer1.Interval = r.Next(7, 15) * 1000;
+            else
+                timer1.Interval = r.Next(0, 5) * 1000 + 1;
         }
 
         private void btnStopClick_Click(object sender, EventArgs e)

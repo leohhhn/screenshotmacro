@@ -48,6 +48,7 @@
             this.timePicker.Name = "timePicker";
             this.timePicker.Size = new System.Drawing.Size(94, 20);
             this.timePicker.TabIndex = 1;
+            this.timePicker.Value = new System.DateTime(2018, 3, 8, 15, 27, 11, 0);
             // 
             // button1
             // 
