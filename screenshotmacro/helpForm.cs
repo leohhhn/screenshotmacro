@@ -24,7 +24,6 @@ namespace screenshotmacro
             "This is a hotkey program made for Synergy Baseball Loggers\n that allows them to click the \"Apply\" button with ease.";
         string howto =
             "First, select a hotkey you want to use.\nSecond, make sure the Logger is running.\nLast, click start.";
-        string cr = "© 2018 OutOfBounds";
         string bug = "If you find any bugs or have suggestions, please e-mail me at";
         string email = "outofbounds@protonmail.com";
 
@@ -32,7 +31,6 @@ namespace screenshotmacro
         {
             labout.Text = about;
             lInsrt.Text = howto;
-            lCr.Text = cr;
             lBug.Text = bug;
 
             tbEmail.Text = email;
@@ -42,6 +40,5 @@ namespace screenshotmacro
             tbEmail.TabStop = false;
         }
 
-      
     }
 }

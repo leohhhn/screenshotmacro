@@ -80,11 +80,11 @@
             // 
             // lCr
             // 
-            this.lCr.Location = new System.Drawing.Point(193, 179);
+            this.lCr.Location = new System.Drawing.Point(233, 179);
             this.lCr.Name = "lCr";
-            this.lCr.Size = new System.Drawing.Size(111, 15);
+            this.lCr.Size = new System.Drawing.Size(71, 18);
             this.lCr.TabIndex = 2;
-            this.lCr.Text = "© 2018 OutOfBounds";
+            this.lCr.Text = "© 2018 Dveri";
             // 
             // lInsrt
             // 

@@ -69,7 +69,6 @@ namespace screenshotmacro
         private void Form1_Load(object sender, EventArgs e)
         {
             ss = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, PixelFormat.Format32bppArgb);
-            timer1.Interval = 1000;
             MessageBox.Show("Warning! Use this program at your own responsibility. \nI will not be responsible for anything that might happen.");
         }
 
@@ -85,7 +84,7 @@ namespace screenshotmacro
                 // id - your own numeber to differentiate between hotkeys
                 // modifier - ctrl, shift, alt etc.
 
-                // Ctrl+F12 is used as the hotkey stopper
+                // Ctrl + F12 is used as the hotkey stopper
 
                 mainForm.RegisterHotKey(this.Handle, 0, 0x0002, 0x7B); // Ctrl + F12  
 
@@ -187,7 +186,7 @@ namespace screenshotmacro
                             g.CopyFromScreen(0, 0, 0, 0, s);
                             GetPixels();
                             this.Cursor = new Cursor(Cursor.Current.Handle);
-                            Point firstPos = Cursor.Position;
+                            Point firstPos = Cursor.Position;  // current cursor position
 
                             if (pos != null)
                             {
