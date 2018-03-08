@@ -58,7 +58,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 1);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(310, 200);
+            this.groupBox1.Size = new System.Drawing.Size(310, 194);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             // 
@@ -80,9 +80,9 @@
             // 
             // lCr
             // 
-            this.lCr.Location = new System.Drawing.Point(233, 179);
+            this.lCr.Location = new System.Drawing.Point(233, 176);
             this.lCr.Name = "lCr";
-            this.lCr.Size = new System.Drawing.Size(71, 18);
+            this.lCr.Size = new System.Drawing.Size(71, 15);
             this.lCr.TabIndex = 2;
             this.lCr.Text = "© 2018 Dveri";
             // 
@@ -102,14 +102,14 @@
             this.label1.Size = new System.Drawing.Size(295, 56);
             this.label1.TabIndex = 5;
             this.label1.Text = "The autoclick option simply clicks the the left mouse button while the Dashboard " +
-    "is focused (the current selected window). Place the mouse on the button itself t" +
-    "o make it work.";
+    "is focused (is the current selected window). Place the mouse on the button itsel" +
+    "f to make it work.";
             // 
             // fHelp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(334, 207);
+            this.ClientSize = new System.Drawing.Size(334, 201);
             this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;

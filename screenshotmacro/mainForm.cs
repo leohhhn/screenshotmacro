@@ -69,7 +69,7 @@ namespace screenshotmacro
         private void Form1_Load(object sender, EventArgs e)
         {
             ss = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, PixelFormat.Format32bppArgb);
-            MessageBox.Show("Warning! Use this program at your own responsibility. \nI will not be responsible for anything that might happen.");
+            MessageBox.Show("Use this program at your own responsibility. \nI will not be responsible for anything that might happen.");
         }
 
         private void btnStart_Click(object sender, EventArgs e)
@@ -245,17 +245,6 @@ namespace screenshotmacro
             h.Show();
         }
 
-        public void timerFormCallback(bool clicked)
-        {
-            // to be able to start the timer from timerInput
-            if (clicked)
-            {
-                timer1.Start();
-                btnStopClick.Enabled = true;
-                btnStartClick.Enabled = false;
-            }
-        }
-
         private void btnStartClick_Click(object sender, EventArgs e)
         {
             dashboard = Process.GetProcessesByName("Synergy Logger Dashboard");
@@ -266,6 +255,18 @@ namespace screenshotmacro
             {
                 ti = new timeInputForm(this);
                 ti.Show();
+            }
+        }
+
+        public void timerFormCallback(bool clicked)
+        {
+            // to be able to start the timer from timerInput
+            if (clicked)
+            {
+                timer1.Start();
+                btnStopClick.Enabled = true;
+                btnStartClick.Enabled = false;
+                lbClick.Text = "Clicking until " + ti.stopTime.ToString();
             }
         }
 
@@ -297,10 +298,7 @@ namespace screenshotmacro
             timer1.Stop();
             btnStopClick.Enabled = false;
             btnStartClick.Enabled = true;
-        }
-
-        private void mainForm_Shown(object sender, EventArgs e)
-        {
+            lbClick.Text = "Autoclicking:";
         }
     }
 }

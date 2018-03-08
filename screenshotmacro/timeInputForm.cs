@@ -15,6 +15,8 @@ namespace screenshotmacro
         public string stopTime;
         public bool clicked = false;
         private mainForm f;
+        DateTime defaultTime = DateTime.Now;
+
         public timeInputForm(mainForm f)
         {
             this.f = f;
@@ -25,6 +27,8 @@ namespace screenshotmacro
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(Screen.PrimaryScreen.Bounds.Width / 2 - this.Width / 2 - 100,
                                       Screen.PrimaryScreen.Bounds.Height / 2 - this.Height / 2);
+            defaultTime.AddHours(2);
+            timePicker.Value = defaultTime;
         }
 
         private void button1_Click(object sender, EventArgs e)

@@ -39,6 +39,5 @@ namespace screenshotmacro
             tbEmail.BackColor = this.BackColor;
             tbEmail.TabStop = false;
         }
-
     }
 }
