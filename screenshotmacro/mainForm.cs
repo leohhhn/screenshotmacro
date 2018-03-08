@@ -70,6 +70,7 @@ namespace screenshotmacro
         {
             ss = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, PixelFormat.Format32bppArgb);
             timer1.Interval = 1000;
+            MessageBox.Show("Warning! Use this program at your own responsibility. \nI will not be responsible for anything that might happen.");
         }
 
         private void btnStart_Click(object sender, EventArgs e)
@@ -297,6 +298,10 @@ namespace screenshotmacro
             timer1.Stop();
             btnStopClick.Enabled = false;
             btnStartClick.Enabled = true;
+        }
+
+        private void mainForm_Shown(object sender, EventArgs e)
+        {
         }
     }
 }

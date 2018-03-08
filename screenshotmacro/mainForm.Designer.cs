@@ -180,6 +180,7 @@
             this.MaximizeBox = false;
             this.Name = "mainForm";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Shown += new System.EventHandler(this.mainForm_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
