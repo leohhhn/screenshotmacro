@@ -71,6 +71,7 @@
             this.MaximizeBox = false;
             this.Name = "timeInputForm";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.timeInput_FormClosed);
+            this.Load += new System.EventHandler(this.timeInputForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
