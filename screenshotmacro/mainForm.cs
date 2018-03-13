@@ -59,7 +59,9 @@ namespace screenshotmacro
         }
         #endregion
 
-        Bitmap ss; // screenshot bitmap
+        Bitmap ss; // screenshot of the whole screen bitmap
+        Bitmap claimed; // claimed image to look for
+        Bitmap dashboardss; // screenshot of the dashboard
         Tuple<int, int> pos; // holds position of the pixel that has the needed color
         bool onlyApply = true;
         timeInputForm ti;
@@ -70,6 +72,7 @@ namespace screenshotmacro
         {
             ss = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, PixelFormat.Format32bppArgb);
             MessageBox.Show("Use this program at your own responsibility. \nI will not be responsible for anything that might happen.");
+            claimed = new Bitmap("..\\..\\..\\claimed.png");
         }
 
         private void btnStart_Click(object sender, EventArgs e)
@@ -272,13 +275,19 @@ namespace screenshotmacro
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+
+            //dashboardss = new Bitmap();
+            //   Graphics g = Graphics.FromImage(dashboardss);
+            //   Size s = new Size(dashboardss.Width, dashboardss.Height);
+            //  g.CopyFromScreen(0, 0, 0, 0, s);
+
             string currentTime = DateTime.Now.ToLongTimeString();
             if (currentTime == ti.stopTime)
             {
                 timer1.Stop();
                 btnStopClick.Enabled = false;
                 btnStartClick.Enabled = true;
-                MessageBox.Show("Done clicking.");
+                MessageBox.Show("Done clicking, no game found.");
             }
 
             foreach (Process p in dashboard)
