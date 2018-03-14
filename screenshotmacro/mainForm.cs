@@ -169,6 +169,23 @@ namespace screenshotmacro
             return null;
         }
 
+        public void lockingBits()
+        {
+            Graphics g = Graphics.FromImage(ss);
+            Size s = new Size(ss.Width, ss.Height);
+            g.CopyFromScreen(0, 0, 0, 0, s);
+
+            Rectangle r = new Rectangle(0, 0, ss.Width, ss.Height);
+            System.Drawing.Imaging.BitmapData ssData = ss.LockBits(r, System.Drawing.Imaging.ImageLockMode.ReadWrite, ss.PixelFormat);
+
+            IntPtr ptr = ssData.Scan0;
+
+            int bytes = Math.Abs(ssData.Stride) * ss.Height;
+            byte[] rgbValues = new byte[bytes];
+            System.Runtime.InteropServices.Marshal.Copy(ptr, rgbValues, 0, bytes);
+
+        }
+
         protected override void WndProc(ref Message m)
         {
             // processes windows messages
@@ -183,11 +200,9 @@ namespace screenshotmacro
                     {
                         if ((int)i == 1) // look at hotkey IDs up
                         {
-                            // taking a screenshot
-                            Graphics g = Graphics.FromImage(ss);
-                            Size s = new Size(ss.Width, ss.Height);
-                            g.CopyFromScreen(0, 0, 0, 0, s);
-                            GetPixels();
+
+
+                            //    GetPixels();
                             this.Cursor = new Cursor(Cursor.Current.Handle);
                             Point firstPos = Cursor.Position;  // current cursor position
 
