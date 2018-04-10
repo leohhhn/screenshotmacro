@@ -42,6 +42,7 @@
             this.lbClick = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.cbBoth = new System.Windows.Forms.CheckBox();
+            this.cbAll = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // btnStart
@@ -153,18 +154,28 @@
             // cbBoth
             // 
             this.cbBoth.AutoSize = true;
-            this.cbBoth.Location = new System.Drawing.Point(41, 81);
+            this.cbBoth.Location = new System.Drawing.Point(12, 85);
             this.cbBoth.Name = "cbBoth";
             this.cbBoth.Size = new System.Drawing.Size(113, 17);
             this.cbBoth.TabIndex = 10;
             this.cbBoth.Text = "Apply + Next Pitch";
             this.cbBoth.UseVisualStyleBackColor = true;
             // 
+            // cbAll
+            // 
+            this.cbAll.AutoSize = true;
+            this.cbAll.Location = new System.Drawing.Point(144, 85);
+            this.cbAll.Name = "cbAll";
+            this.cbAll.Size = new System.Drawing.Size(15, 14);
+            this.cbAll.TabIndex = 11;
+            this.cbAll.UseVisualStyleBackColor = true;
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(201, 204);
+            this.Controls.Add(this.cbAll);
             this.Controls.Add(this.cbBoth);
             this.Controls.Add(this.lbClick);
             this.Controls.Add(this.btnStopClick);
@@ -199,6 +210,7 @@
         private System.Windows.Forms.Label lbClick;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.CheckBox cbBoth;
+        private System.Windows.Forms.CheckBox cbAll;
     }
 }
 

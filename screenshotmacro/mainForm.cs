@@ -59,26 +59,35 @@ namespace screenshotmacro
         }
         #endregion
 
-        Bitmap ss; // screenshot of the whole screen bitmap
-        Bitmap claimed; // claimed image to look for
-        Bitmap dashboardss; // screenshot of the dashboard
+        Bitmap ss; // screenshot of the whole screen bitmap     
         Tuple<int, int> pos; // holds position of the pixel that has the needed color
         bool onlyApply = true;
+        bool clickAll = false;
         timeInputForm ti;
         Process[] dashboard;
         Random r = new Random();
+
+        Tuple<int, int> p1 = new Tuple<int, int>(704, 553);
+        Tuple<int, int> p2 = new Tuple<int, int>(1053, 553);
+        Tuple<int, int> p3 = new Tuple<int, int>(1292, 583);
+        Tuple<int, int> p4 = new Tuple<int, int>(955, 264);
+        Tuple<int, int> p5 = new Tuple<int, int>(706, 734);
+        Tuple<int, int> p6 = new Tuple<int, int>(1244, 885);
 
         private void Form1_Load(object sender, EventArgs e)
         {
             ss = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, PixelFormat.Format32bppArgb);
             MessageBox.Show("Use this program at your own responsibility. \nI will not be responsible for anything that might happen.");
-            claimed = new Bitmap("..\\..\\..\\claimed.png");
         }
 
         private void btnStart_Click(object sender, EventArgs e)
         {
             if (cbBoth.Checked)
                 onlyApply = false;
+
+            if (cbAll.Checked)
+                clickAll = true;
+
 
             if (loggerIsRunning())
             {
@@ -90,6 +99,7 @@ namespace screenshotmacro
                 // Ctrl + F12 is used as the hotkey stopper
 
                 mainForm.RegisterHotKey(this.Handle, 0, 0x0002, 0x7B); // Ctrl + F12  
+                mainForm.RegisterHotKey(this.Handle, 2, 0x0002, 0x46); // Ctrl + F
 
                 // registering hotkeys depending on user input
                 if (rbSpace.Checked)
@@ -113,13 +123,13 @@ namespace screenshotmacro
                     MessageBox.Show("To pause/disable the hotkey, press Ctrl + F12." +
                                         "\nHotkeys won't work unless the Logger is open and in fullscreen mode.");
                 }
-                else if (rbCtrlF.Checked)
-                {
-                    mainForm.RegisterHotKey(this.Handle, 1, 0x0002, 0x46); // Ctrl + F
-                    this.Visible = false;
-                    MessageBox.Show("To pause/disable the hotkey, press Ctrl + F12." +
-                        "\nHotkeys won't work unless the Logger is open and in fullscreen mode.");
-                }
+                //else if (rbCtrlF.Checked)
+                //{
+                //    mainForm.RegisterHotKey(this.Handle, 1, 0x0002, 0x46); // Ctrl + F
+                //    this.Visible = false;
+                //    MessageBox.Show("To pause/disable the hotkey, press Ctrl + F12." +
+                //        "\nHotkeys won't work unless the Logger is open and in fullscreen mode.");
+                //}
                 else
                     MessageBox.Show("Please select a hotkey.", "Error");
             }
@@ -208,8 +218,28 @@ namespace screenshotmacro
                                     Cursor.Position = new Point(pos.Item1 + 253, pos.Item2 + 13);
                                     LeftClick();
                                     Cursor.Position = firstPos;
+
+
                                 }
                             }
+                        }
+                        else if ((int)i == 2)
+                        {
+                            this.Cursor = new Cursor(Cursor.Current.Handle);
+                            Point firstPos = Cursor.Position;  // current cursor position                 
+                            Cursor.Position = new Point(p1.Item1, p1.Item2);
+                            LeftClick();
+                            Cursor.Position = new Point(p2.Item1, p2.Item2);
+                            LeftClick();
+                            Cursor.Position = new Point(p3.Item1, p3.Item2);
+                            LeftClick();
+                            Cursor.Position = new Point(p4.Item1, p4.Item2);
+                            LeftClick();
+                            Cursor.Position = new Point(p5.Item1, p5.Item2);
+                            LeftClick();
+                            Cursor.Position = new Point(p6.Item1, p6.Item2);
+                            LeftClick();
+                            Cursor.Position = firstPos;
                         }
                         else
                         {
@@ -309,5 +339,7 @@ namespace screenshotmacro
             btnStartClick.Enabled = true;
             lbClick.Text = "Autoclicking:";
         }
+
+
     }
 }
