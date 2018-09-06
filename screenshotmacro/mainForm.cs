@@ -77,7 +77,7 @@ namespace screenshotmacro
         private void Form1_Load(object sender, EventArgs e)
         {
             ss = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height, PixelFormat.Format32bppArgb);
-            MessageBox.Show("Use this program at your own responsibility. \nI will not be responsible for anything that might happen.");
+          
         }
 
         private void btnStart_Click(object sender, EventArgs e)
@@ -325,11 +325,18 @@ namespace screenshotmacro
                     LeftClick();
 
             // randomizes autoclicking
-            int rand = r.Next(3);
-            if (rand == 0 || rand == 1)
-                timer1.Interval = r.Next(7, 15) * 1000;
+            if (cbAll.Checked)
+            {
+                timer1.Interval = 1000;
+            }
             else
-                timer1.Interval = r.Next(0, 5) * 1000 + 1;
+            {
+                int rand = r.Next(3);
+                if (rand == 0 || rand == 1)
+                    timer1.Interval = r.Next(7, 15) * 1000;
+                else
+                    timer1.Interval = r.Next(0, 5) * 1000 + 1;
+            }
         }
 
         private void btnStopClick_Click(object sender, EventArgs e)

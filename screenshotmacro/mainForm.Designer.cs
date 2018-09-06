@@ -154,7 +154,7 @@
             // cbBoth
             // 
             this.cbBoth.AutoSize = true;
-            this.cbBoth.Location = new System.Drawing.Point(12, 85);
+            this.cbBoth.Location = new System.Drawing.Point(6, 84);
             this.cbBoth.Name = "cbBoth";
             this.cbBoth.Size = new System.Drawing.Size(113, 17);
             this.cbBoth.TabIndex = 10;
@@ -164,10 +164,11 @@
             // cbAll
             // 
             this.cbAll.AutoSize = true;
-            this.cbAll.Location = new System.Drawing.Point(144, 85);
+            this.cbAll.Location = new System.Drawing.Point(134, 85);
             this.cbAll.Name = "cbAll";
-            this.cbAll.Size = new System.Drawing.Size(15, 14);
+            this.cbAll.Size = new System.Drawing.Size(46, 17);
             this.cbAll.TabIndex = 11;
+            this.cbAll.Text = "Fast";
             this.cbAll.UseVisualStyleBackColor = true;
             // 
             // mainForm
