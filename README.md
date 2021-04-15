@@ -1,1 +1,2 @@
-To get the latest version of the program click "View Raw" on this link: https://github.com/leonhudak/screenshotmacro/blob/master/screenshotmacro/bin/Debug/screenshotmacro.exe
+
+This is a small program that I created in C# in order to automate a repeating task that was bothering me for quite some time.
